@@ -25,8 +25,7 @@ app.post('/carritoAdd', function (req, res) {
     let objectJson= req.body;
     let persons=[];
     persons.push(objectJson);
-    carritoJson.push(persons);
-    console.log( persons);
+    carritoJson.push(persons[0]);
     leer.data.writeFile('carrito','');
     leer.data.writeFile('carrito',JSON.stringify(carritoJson));
     console.log("se agrego al carrito");
@@ -37,12 +36,16 @@ app.post('/carritoAdd', function (req, res) {
 
 app.get('/comprar', (req, res) => {
   
-
     let productos = leer.data.readFile('dbProductos','utf8');
     let productosJson = JSON.parse(productos);
 
     let carrito = leer.data.readFile('carrito','utf8');
     let carritoJson = JSON.parse(carrito);
+
+    carritoJson.forEach(carritoE => {
+        let index = productosJson.findIndex(productoE => productoE.nombre === carritoE.nombre);
+        productosJson[index].cantida -= carritoE.cantida;
+    });
 
     leer.data.writeFile('carrito','[]');
 
@@ -54,7 +57,7 @@ app.get('/comprar', (req, res) => {
     let carritoVacioJson = JSON.parse(carritoVacio);
     console.log(carritoVacioJson);
   
-    res.send('Pagado, el carrio a quedado vacio');
+    res.send('Pagado, el carrio a quedado vacio y catidades en catalogo descontadas.');
 })
 
 

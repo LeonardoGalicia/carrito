@@ -1,9 +1,9 @@
 TIPO GET /listarProductos   muestra todos los productos. 
 
 TIPO POST /carritoAdd   agrega un producto al carrito se le debe enviar un json ejemplo
- {"nombre": "pantalon gris","categoria": "pants","precio": "200","cantida": 20}
+ {"nombre": "pantalon gris","categoria": "pants","precio": "200","cantida": 2}
 
-TIPO GET /comprar   realiza la compra y deja vacio el carro
+TIPO GET /comprar   realiza la compra, deja vacio el carro y descuenta las catidades vendidas a dbProductos.
 
 TIPO POST /buscar  realiza una busqueda le debe enviar un json ejemplo 
 {"filter":"categoria","palabra":"pants"} donde filter es el campo por el cual quiere filtrar: 
